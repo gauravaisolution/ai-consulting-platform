@@ -1,12 +1,19 @@
+// Site configuration - reads from environment variables
+// Set values in .env file locally, and in Vercel dashboard for production
+
 export const site = {
-  name: "FutureStack Solutions AI",
-  tagline: "Websites, AI chatbots, and intelligent data systems for modern businesses",
+  name: import.meta.env.PUBLIC_SITE_NAME || "Your Company",
+  tagline: import.meta.env.PUBLIC_SITE_TAGLINE || "Your tagline here",
   description:
-    "We build fast business websites, integrate AI chatbots, and deploy data pipelines — so your business looks premium and runs smarter.",
-  email: "hello@example.com",
+    import.meta.env.PUBLIC_SITE_DESCRIPTION ||
+    "Your site description for SEO and meta tags",
+  email: import.meta.env.PUBLIC_SITE_EMAIL || "hello@example.com",
   tallyFormUrl:
-    "https://tally.so/embed/w4e2qk?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
-  calcomUrl: "https://cal.com/your-username/strategy-call?embed=true",
+    import.meta.env.PUBLIC_TALLY_FORM_URL ||
+    "https://tally.so/embed/YOUR_FORM_ID",
+  calcomUrl:
+    import.meta.env.PUBLIC_CALCOM_URL ||
+    "https://cal.com/your-username/meeting-type?embed=true",
 } as const;
 
 export const navLinks = [
@@ -89,7 +96,7 @@ export const clientLogos = [
 export const testimonials = [
   {
     quote:
-      "FutureStack delivered our entire website in under a week. The design looks premium, loads instantly, and we booked our first client call within 48 hours of going live.",
+      "They delivered our entire website in under a week. The design looks premium, loads instantly, and we booked our first client call within 48 hours of going live.",
     name: "Sarah Chen",
     role: "Founder",
     company: "Acme Advisory Group",
@@ -123,19 +130,22 @@ export const processSteps = [
   {
     step: "01",
     title: "Discovery Call",
-    description: "We learn your goals, audience, and technical needs in a free 30-minute strategy session.",
+    description:
+      "We learn your goals, audience, and technical needs in a free 30-minute strategy session.",
     icon: "compass",
   },
   {
     step: "02",
     title: "Build & Demo",
-    description: "Working prototype in days — website, chatbot, or data pipeline you can see and test before committing.",
+    description:
+      "Working prototype in days — website, chatbot, or data pipeline you can see and test before committing.",
     icon: "hammer",
   },
   {
     step: "03",
     title: "Launch & Support",
-    description: "Deployed to production with documentation, handoff, and optional ongoing support.",
+    description:
+      "Deployed to production with documentation, handoff, and optional ongoing support.",
     icon: "rocket",
   },
 ] as const;
