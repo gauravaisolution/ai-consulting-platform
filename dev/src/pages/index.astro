@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ClientLogos from "../components/ClientLogos.astro";
+import ServicesGrid from "../components/ServicesGrid.astro";
+import DemoTabs from "../components/DemoTabs.astro";
+import ProcessSection from "../components/ProcessSection.astro";
+import Testimonials from "../components/Testimonials.astro";
+import TechStack from "../components/TechStack.astro";
+import CTA from "../components/CTA.astro";
+import { site } from "../site.config";
+---
+
+<BaseLayout title={site.name}>
+  <Hero />
+  <ClientLogos />
+  <ServicesGrid />
+  <DemoTabs />
+  <ProcessSection />
+
+  <section class="reveal px-6 py-16">
+    <div class="mx-auto max-w-6xl text-center">
+      <h2 class="text-3xl font-bold md:text-4xl">Why FutureStack</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-gray-600 dark:text-gray-400">
+        One partner for your website, chatbot, and data AI — shipped fast, built to scale.
+      </p>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="glass-card hover-lift rounded-xl p-6">
+          <p class="text-3xl font-bold text-blue-600">5 days</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Average website delivery time</p>
+        </div>
+        <div class="glass-card hover-lift rounded-xl p-6">
+          <p class="text-3xl font-bold text-blue-600">40%</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Support tickets deflected by AI chatbots</p>
+        </div>
+        <div class="glass-card hover-lift rounded-xl p-6">
+          <p class="text-3xl font-bold text-blue-600">85%</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Reduction in manual data entry</p>
+        </div>
+        <div class="glass-card hover-lift rounded-xl p-6">
+          <p class="text-3xl font-bold text-blue-600">$0</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Server costs at launch on Vercel</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+  <TechStack />
+  <CTA />
+</BaseLayout>

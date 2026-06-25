@@ -1,0 +1,80 @@
+---
+import DemoWebsite from "./DemoWebsite.astro";
+import DemoChatbot from "./DemoChatbot.astro";
+import DemoExtractor from "./DemoExtractor.astro";
+import DemoSearch from "./DemoSearch.astro";
+
+const tabs = [
+  { id: "website", label: "Websites", color: "emerald" },
+  { id: "chatbot", label: "Chatbots", color: "violet" },
+  { id: "extractor", label: "Data Extractor", color: "blue" },
+  { id: "search", label: "Knowledge Search", color: "indigo" },
+] as const;
+---
+
+<section id="demos" class="reveal bg-gray-50 px-6 py-20 dark:bg-gray-900/50">
+  <div class="mx-auto max-w-4xl text-center">
+    <h2 class="text-3xl font-bold md:text-4xl">See it in action</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-gray-600 dark:text-gray-400">
+      Interactive simulations — pick a demo below. No signup required.
+    </p>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-2">
+    {
+      tabs.map((tab, i) => (
+        <button
+          type="button"
+          data-tab={tab.id}
+          class:list={[
+            "demo-tab rounded-xl px-5 py-2.5 text-sm font-semibold transition",
+            i === 0
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
+              : "bg-white text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700",
+          ]}
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- Tab panels -->
+  <div class="mx-auto mt-8 max-w-4xl">
+    <div data-panel="website" class="demo-panel">
+      <DemoWebsite />
+    </div>
+    <div data-panel="chatbot" class="demo-panel hidden">
+      <DemoChatbot />
+    </div>
+    <div data-panel="extractor" class="demo-panel hidden">
+      <DemoExtractor />
+    </div>
+    <div data-panel="search" class="demo-panel hidden">
+      <DemoSearch />
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll(".demo-tab");
+  const panels = document.querySelectorAll(".demo-panel");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = (tab as HTMLElement).dataset.tab!;
+
+      tabs.forEach((t) => {
+        t.classList.remove("bg-blue-600", "text-white", "shadow-md", "shadow-blue-600/25");
+        t.classList.add("bg-white", "text-gray-600", "dark:bg-gray-800", "dark:text-gray-300");
+      });
+      tab.classList.add("bg-blue-600", "text-white", "shadow-md", "shadow-blue-600/25");
+      tab.classList.remove("bg-white", "text-gray-600", "dark:bg-gray-800", "dark:text-gray-300");
+
+      panels.forEach((panel) => {
+        panel.classList.toggle("hidden", (panel as HTMLElement).dataset.panel !== target);
+      });
+    });
+  });
+</script>

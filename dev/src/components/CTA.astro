@@ -1,0 +1,37 @@
+---
+interface Props {
+  heading?: string;
+  subtext?: string;
+}
+
+const {
+  heading = "Ready to build your future stack?",
+  subtext = "Book a free 30-minute strategy call. We'll map your goals and show you what's possible.",
+} = Astro.props;
+---
+
+<section class="reveal px-6 py-20">
+  <div class="cta-glow mx-auto max-w-4xl rounded-3xl p-px">
+    <div
+      class="rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-600 px-8 py-16 text-center text-white"
+    >
+      <h2 class="text-3xl font-bold md:text-4xl">{heading}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-blue-100">{subtext}</p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="/contact"
+          class="w-full rounded-xl bg-white px-8 py-3.5 text-base font-semibold text-blue-600 transition hover:bg-blue-50 sm:w-auto"
+        >
+          Schedule Your Call
+        </a>
+        <a
+          href="/services"
+          class="w-full rounded-xl border border-white/30 px-8 py-3.5 text-base font-semibold text-white transition hover:bg-white/10 sm:w-auto"
+        >
+          View Services
+        </a>
+      </div>
+      <p class="mt-6 text-xs text-blue-200">Free call · No commitment · Response within 24 hours</p>
+    </div>
+  </div>
+</section>

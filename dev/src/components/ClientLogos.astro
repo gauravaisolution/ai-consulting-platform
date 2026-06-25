@@ -1,0 +1,29 @@
+---
+import { clientLogos } from "../site.config";
+
+const logos = [...clientLogos, ...clientLogos];
+---
+
+<section class="border-y border-gray-100 bg-gray-50/50 py-10 dark:border-gray-800 dark:bg-gray-900/30">
+  <div class="mx-auto max-w-6xl px-6">
+    <p class="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-gray-400">
+      Trusted by forward-thinking businesses
+    </p>
+    <div class="logo-marquee relative overflow-hidden">
+      <div class="logo-track flex gap-8">
+        {
+          logos.map((logo) => (
+            <div class="flex shrink-0 items-center gap-3 rounded-xl border border-gray-200/60 bg-white px-5 py-3 dark:border-gray-700/60 dark:bg-gray-900/60">
+              <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-xs font-bold text-white">
+                {logo.abbr}
+              </div>
+              <span class="whitespace-nowrap text-sm font-semibold text-gray-600 dark:text-gray-300">
+                {logo.name}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
