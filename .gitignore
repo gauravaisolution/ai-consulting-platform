@@ -10,6 +10,13 @@ dist/
 .env.*
 !.env.example
 
+# Private documentation (local only)
+private/
+
+# AI assistants
+.claude/
+.cursor/
+
 # OS
 .DS_Store
 Thumbs.db
@@ -23,6 +30,9 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Vercel
+.vercel
 
 # Backup
 *.bak

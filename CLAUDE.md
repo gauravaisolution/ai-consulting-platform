@@ -1,175 +1,73 @@
-# FutureStack AI Solutions
+# AI Consulting Platform
 
-> Data & AI Consulting Platform - Zero-cost serverless architecture
-
-## Quick Links
-
-| Resource | URL |
-|----------|-----|
-| **Production Site** | https://ai-solution-six.vercel.app |
-| **GitHub Repo** | https://github.com/gauravaisolution/ai-consulting-platform |
-| **Vercel Dashboard** | https://vercel.com/gauravaisolution-3076s-projects/ai-solution |
-
----
-
-## Project Overview
-
-### What This Is
-A professional consulting website for **FutureStack AI Solutions** offering:
-- Business Websites
-- AI Chatbot Integration
-- Data Extraction & Pipelines
-- Enterprise Knowledge Search
-- GenAI Strategy & Implementation
-
-### Business Model
-1. Visitor lands on site
-2. Explores services and demos
-3. Fills out project intake form (Tally.so)
-4. Books a strategy call (Cal.com)
-5. Converts to paying client
-
----
+> Development guide for Claude Code
 
 ## Project Structure
 
 ```
 ai-solution/
-├── dev/                    # Application code (Astro + Tailwind)
-│   ├── src/
-│   │   ├── pages/         # 5 pages
-│   │   ├── components/    # Reusable components
-│   │   ├── layouts/       # BaseLayout
-│   │   └── site.config.ts # Central configuration
-│   ├── .env               # Local secrets (gitignored)
-│   ├── .env.example       # Template
-│   ├── PROGRESS.md        # Development tracking
-│   └── README.md          # Development guide
-├── learning/              # Learning curriculum (9 modules)
-├── resource/              # Blueprints, guides
-└── CLAUDE.md              # This file
+├── dev/           # Application code (Astro + Tailwind)
+├── learning/      # Learning curriculum
+├── resource/      # Reference docs
+└── private/       # Internal docs (gitignored)
 ```
 
----
-
-## Tech Stack
-
-| Layer | Technology | Cost |
-|-------|------------|------|
-| Frontend | Astro 7.x + TailwindCSS 4.x | Free |
-| Hosting | Vercel | Free tier |
-| Forms | Tally.so | Free tier |
-| Scheduling | Cal.com | Free tier |
-| Repository | GitHub | Free |
-| **Total** | | **$0/month** |
-
----
-
-## Three Parallel Tracks
-
-| Track | Folder | Purpose |
-|-------|--------|---------|
-| **Development** | `dev/` | Build the consulting platform |
-| **Learning** | `learning/` | Build skills & credentials |
-| **Portfolio** | `learning/portfolio/` | Build public credibility |
-
----
-
-## Development Workflow
-
-### Git Branching Strategy
-
-```
-main (production) ←── merge ←── develop (preview/staging)
-```
-
-### Daily Workflow
+## Development
 
 ```bash
-# 1. Work on develop branch
-git checkout develop
-
-# 2. Make changes, commit, push
-git add <files>
-git commit -m "description"
-git push                    # → Creates preview deployment
-
-# 3. Test on preview URL
-
-# 4. When ready, merge to main
-git checkout main
-git merge develop
-git push                    # → Auto-deploys to production
+cd dev
+npm install
+npm run dev      # localhost:4321
+npm run build    # production build
 ```
 
-### Vercel Auto-Deploy
+## Git Workflow
 
-| Branch | Environment | URL |
-|--------|-------------|-----|
-| `main` | Production | ai-solution-six.vercel.app |
-| `develop` | Preview | Auto-generated per commit |
+```
+main (production) ←── merge ←── develop (preview)
+```
 
----
+```bash
+# Work on develop
+git checkout develop
+git add . && git commit -m "message"
+git push
+
+# Deploy to production
+git checkout main
+git merge develop
+git push
+```
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `dev/src/site.config.ts` | Site configuration |
+| `dev/src/pages/` | Route pages |
+| `dev/src/components/` | UI components |
+| `dev/.env` | Local environment variables |
 
 ## Environment Variables
 
-Sensitive data is stored in environment variables, not in code.
+Set in `.env` locally, Vercel dashboard for production:
 
-| Variable | Purpose |
-|----------|---------|
-| `PUBLIC_SITE_NAME` | Business name displayed on site |
-| `PUBLIC_SITE_TAGLINE` | Homepage tagline |
-| `PUBLIC_SITE_DESCRIPTION` | SEO meta description |
-| `PUBLIC_SITE_EMAIL` | Contact email |
-| `PUBLIC_TALLY_FORM_ID` | Tally.so form identifier |
-| `PUBLIC_CALCOM_LINK` | Cal.com booking link |
+- `PUBLIC_SITE_NAME`
+- `PUBLIC_SITE_TAGLINE`
+- `PUBLIC_SITE_DESCRIPTION`
+- `PUBLIC_SITE_EMAIL`
+- `PUBLIC_TALLY_FORM_ID`
+- `PUBLIC_CALCOM_LINK`
 
-**Local:** Set in `dev/.env`
-**Production:** Set in Vercel Dashboard → Settings → Environment Variables
+## Private Documentation
 
----
-
-## Integrations
-
-### Tally.so (Lead Capture)
-- **Type:** Popup form
-- **Dashboard:** https://tally.so
-- **Form ID:** `1AxW8Q`
-
-### Cal.com (Booking)
-- **Type:** Inline calendar embed
-- **Dashboard:** https://app.cal.com
-- **Link:** `futurestackaisolutions/strategy-call`
-
----
-
-## Team Perspectives (for decision-making)
-
-| Expert | Focus | Key Question |
-|--------|-------|--------------|
-| **Alex** (Tech Lead) | Architecture, code quality | Is this the simplest design? |
-| **Priya** (AI/GenAI) | Demo realism, LLM strategy | Can we demo without API costs? |
-| **Marcus** (Data) | Data pipelines, schemas | Does output look production-grade? |
-| **Jordan** (UX) | Design, animations, conversion | Does this feel fast and premium? |
-| **Sam** (DevOps) | Deployment, CI/CD, security | Can we ship this safely? |
-| **Riley** (Product) | Lead funnel, conversion | Does this move toward a booked call? |
-
----
+Detailed docs are in `private/` folder (gitignored):
+- `INTERNAL.md` - Quick reference, accounts
+- `BUSINESS.md` - Business overview, roadmap
 
 ## Decision Principles
 
-1. **$0 launch** — Free tiers only until revenue justifies spend
+1. **$0 launch** — Free tiers until revenue justifies spend
 2. **Simulate first** — Real AI/backend only when necessary
 3. **Ship incrementally** — Working site beats perfect architecture
 4. **Convert** — If it doesn't help book calls, deprioritize
-
----
-
-## Key References
-
-| Document | Location |
-|----------|----------|
-| Development README | `dev/README.md` |
-| Progress Tracking | `dev/PROGRESS.md` |
-| Learning Path | `learning/LEARNING_PATH.md` |
-| Domain Guide | `resource/Domain_Deployment_Guide.md` |
