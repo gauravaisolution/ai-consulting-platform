@@ -16,7 +16,7 @@ import { site } from "../site.config";
     </div>
   </section>
 
-  <!-- Step 1: Lead intake (Tally.so) -->
+  <!-- Step 1: Lead intake (Tally.so Popup) -->
   <section class="px-6 pb-12" id="intake-form">
     <div class="mx-auto max-w-2xl">
       <div class="mb-6 flex items-center gap-3">
@@ -27,23 +27,29 @@ import { site } from "../site.config";
         <h2 class="text-xl font-semibold">Project intake</h2>
       </div>
       <div
-        class="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
+        class="rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-8 text-center dark:border-gray-800 dark:from-gray-900 dark:to-gray-950"
       >
-        <!-- Replace tallyFormUrl in src/site.config.ts with your real Tally embed URL -->
-        <iframe
-          data-tally-src={site.tallyFormUrl}
-          loading="lazy"
-          width="100%"
-          height="400"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          title="Project intake form"
-          class="min-h-[400px] w-full"></iframe>
+        <div class="mb-6">
+          <span class="text-5xl">📋</span>
+        </div>
+        <h3 class="mb-3 text-lg font-semibold">Tell us about your project</h3>
+        <p class="mb-6 text-gray-600 dark:text-gray-400">
+          Fill out a quick form so we can understand your needs before the call.
+        </p>
+        <button
+          data-tally-open={site.tallyFormId}
+          data-tally-emoji-text="👋"
+          data-tally-emoji-animation="wave"
+          data-tally-layout="modal"
+          data-tally-width="500"
+          class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3 font-semibold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/25"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Open Project Form
+        </button>
       </div>
-      <p class="mt-3 text-center text-xs text-gray-500">
-        Powered by Tally.so — update embed URL in <code class="text-blue-600">src/site.config.ts</code>
-      </p>
     </div>
   </section>
 
@@ -60,31 +66,59 @@ import { site } from "../site.config";
       <div
         class="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
       >
-        <!-- Replace calcomUrl in src/site.config.ts with your real Cal.com embed URL -->
-        <iframe
-          src={site.calcomUrl}
-          width="100%"
-          height="700"
-          frameborder="0"
-          title="Book a strategy call"
-          class="min-h-[700px] w-full"></iframe>
+        <!-- Cal.com inline embed -->
+        <div
+          id="cal-inline-embed"
+          data-cal-link={site.calcomLink}
+          class="min-h-[700px] w-full"
+        ></div>
       </div>
-      <p class="mt-3 text-center text-xs text-gray-500">
-        Powered by Cal.com — update embed URL in <code class="text-blue-600">src/site.config.ts</code>
-      </p>
     </div>
   </section>
 </BaseLayout>
 
-<script
-  is:inline
-  src="https://tally.so/widgets/embed.js"
-></script>
+<!-- Cal.com embed script -->
 <script is:inline>
-  // Tally embed loader
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof Tally !== "undefined") {
-      Tally.loadEmbeds();
-    }
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal;
+      let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, ["initNamespace", namespace]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  // Get cal link from data attribute
+  const calElement = document.getElementById("cal-inline-embed");
+  const calLink = calElement?.dataset.calLink || "futurestackaisolutions/strategy-call";
+
+  Cal("init", "strategy-call", { origin: "https://app.cal.com" });
+  Cal.config = Cal.config || {};
+  Cal.config.forwardQueryParams = true;
+
+  Cal.ns["strategy-call"]("inline", {
+    elementOrSelector: "#cal-inline-embed",
+    config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true" },
+    calLink: calLink,
   });
+
+  Cal.ns["strategy-call"]("ui", { "hideEventTypeDetails": false, "layout": "month_view" });
 </script>

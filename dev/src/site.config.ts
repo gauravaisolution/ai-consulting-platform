@@ -8,12 +8,9 @@ export const site = {
     import.meta.env.PUBLIC_SITE_DESCRIPTION ||
     "Your site description for SEO and meta tags",
   email: import.meta.env.PUBLIC_SITE_EMAIL || "hello@example.com",
-  tallyFormUrl:
-    import.meta.env.PUBLIC_TALLY_FORM_URL ||
-    "https://tally.so/embed/YOUR_FORM_ID",
-  calcomUrl:
-    import.meta.env.PUBLIC_CALCOM_URL ||
-    "https://cal.com/your-username/meeting-type?embed=true",
+  tallyFormId: import.meta.env.PUBLIC_TALLY_FORM_ID || "YOUR_FORM_ID",
+  calcomLink:
+    import.meta.env.PUBLIC_CALCOM_LINK || "your-username/meeting-type",
 } as const;
 
 export const navLinks = [
